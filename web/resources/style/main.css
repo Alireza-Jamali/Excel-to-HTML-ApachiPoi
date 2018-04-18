@@ -1,0 +1,82 @@
+@media screen {
+    
+    .ui-datatable-header {
+        text-align: left !important;
+    }
+    .ui-datatable-header div, .ui-datatable-header button {
+        display: inline !important;
+    }    
+
+    .ui-growl {
+        position:absolute;
+        top:11%;
+        right:80% !important;
+        width:301px;
+        z-index:9999;
+    }
+    .box-css {
+        -webkit-box-sizing: content-box;
+        -moz-box-sizing: content-box;
+        box-sizing: content-box;
+        width: 150px;
+        height: 25px;
+        border: none;
+        font: normal 15px/1.5 "Times New Roman", Times, serif;
+        color: #003399;
+        text-align: center;
+        -o-text-overflow: ellipsis;
+        text-overflow: ellipsis;
+        -webkit-box-shadow: 3px 3px 18px 3px rgba(0,150,255,0.91) ;
+        box-shadow: 3px 3px 18px 3px rgba(0,150,255,0.91) ;
+    } 
+}
+
+@media print {   
+    
+    ui-datatable ui-widget ui-datatable-rtl
+    
+    body, table, thead, tbody, tr, td, div, span {
+        font-size: 0.9em !important;   
+        overflow: visible;
+    }
+    #headerFilter, .headerFilter, .ui-datatable-header {
+        
+        border: none !important;
+        display: none !important;
+    }
+    .columnRadif {
+        
+        width: 5px !important;
+        text-align: center !important;
+    }
+    .columnDate {
+        
+        width: 30px !important;
+        text-align: center !important;
+    }
+    .columnTime {
+        
+        width: 25px !important;
+        text-align: center !important;
+    }
+    .columnVariz {
+        
+        width: 35px !important;
+        text-align: center !important;
+    }
+    .columnBardasht {
+        
+        width: 35px !important;
+        text-align: center !important;
+    }
+    .columnYaddasht {
+        
+        word-wrap: break-word !important;
+        width: 75px !important;
+    }
+    .columnSharh {
+        
+        word-wrap: break-word !important;
+        width: 100px !important;
+    }
+}

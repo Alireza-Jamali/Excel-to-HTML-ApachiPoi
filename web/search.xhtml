@@ -1,0 +1,118 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    
+    
+    
+    <h:head>
+        <style>
+            .hide-column-names thead {
+                display: none;
+            }
+        </style>
+        <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+        <title>گزارش حساب</title>
+        <h:outputStylesheet library="style" name="main.css" />
+        
+    </h:head>
+    
+    <h:body dir="rtl">
+        <h:form>
+            <p:fileUpload skinSimple="true" style="width: 30%; color: green !important;" fileUploadListener="#{viewInteractionsHandler.handleFileUpload}" mode="advanced"
+                          update="messages frmFinal:ref" auto="true" allowTypes="/(\.|\/)(xls|xlsx)$/" />
+            <p:growl id="messages" showDetail="true" />
+        </h:form>
+        <h:form>
+            <h:form>
+                <p:dataTable styleClass="hide-column-names" emptyMessage="شماره حساب" style="width: 480px" id="sharhTable" value="#{viewInteractionsHandler.inputSharhList}" var="inSharhList" >
+                    <p:column>
+                        <p:inputText title="شماره حسابی که وارد میکنید میبایست مطابق شماره حساب موجود در فایل اکسل باشد" style="float: right; margin-top: 5px;" size="40" value="#{inSharhList.value}" placeholder="جستجو در شرح"/>
+                        <p:commandButton value="x" action="#{viewInteractionsHandler.remove(inSharhList)}" update="sharhTable"/>
+                    </p:column>
+                </p:dataTable>
+                <p:commandButton value="اضافه کن" action="#{viewInteractionsHandler.add()}" update="sharhTable"/>    
+            
+                <br/><br/>
+                <div style="width: 100%;">
+                    <p:commandButton style="float: right; margin-top: 10px" value="جمع" action="#{viewInteractionsHandler.handleSharh()}" update="sharhResult frmFinal:ref"/>
+                    <div style="right: 20%; float: right; margin-right: 20px; margin-top: 13px" class="box-css">
+                        <p:outputLabel id="sharhResult" value="#{viewInteractionsHandler.sharhResult}"/><p/>
+                    </div>
+                    <p:commandButton style="float: right; margin-right: 250px; margin-top: 10px" value="reset" action="#{viewInteractionsHandler.reset()}" update="frmFinal:ref sharhResult sharhTable yaddashtParentForm:yaddashtRecord" />
+                </div><br/><br/><br/><br/>
+                
+            </h:form>     
+        </h:form>
+
+        <h:form id="yaddashtParentForm">
+            <p:inputText id="yaddashtRecord" size="40" value="#{viewInteractionsHandler.yaddashtCode}" placeholder="کد یادداشت"/><br/>
+            <p:commandButton value="جستجو" actionListener="#{viewInteractionsHandler.handleYaddasht()}" update="frmFinal:ref"/><br/>
+        </h:form>
+        <h:form id="frmFinal">
+
+            <p:dataTable emptyMessage="جدول خالی است" id="ref" style="font-size: 20px;" var="table" value="#{viewInteractionsHandler.tableList}" dir="rtl" >
+
+                <f:facet name="header" id="headerFilter">
+                    <p:commandButton id="toggler" type="button" value="فیلتر" icon="ui-icon-calculator" styleClass="headerFilter" />
+                    <p:columnToggler datasource="ref" trigger="toggler" />
+                    
+                    <p:commandButton value="Print" type="button" icon="ui-icon-print" styleClass="headerFilter">
+                        <p:printer  target="ref" />
+                    </p:commandButton>
+                </f:facet>                     
+
+                <p:column headerText="ردیف" styleClass="columnRadif" style="width: 15px; text-align: center;">
+                    <h:outputText value="#{table.radif}" />
+                </p:column>
+
+                <p:column headerText="شرح" styleClass="columnSharh" style="width: 300px; word-wrap: break-word;  text-align: center;">
+                    <h:outputText title="#{table.sharh}" value="#{table.sharh}" />
+                </p:column>
+
+                <p:column headerText="تاریخ" styleClass="columnDate" style="width: 72px; text-align: center;">
+                    <h:outputText value="#{table.date}" />
+                </p:column>
+
+                <p:column headerText="زمان" styleClass="columnTime" style="text-align: center; width: 60px;">
+                    <h:outputText value="#{table.time}" />
+                </p:column>
+
+                <p:column headerText="واریز" styleClass="columnVariz" style="text-align: center; width: 90px;">
+                    <h:outputText value="#{table.variz}" />
+                </p:column>
+
+                <p:column headerText="برداشت" styleClass="columnBardasht" style="text-align: center; width: 100px;">
+                    <h:outputText value="#{table.bardashtInString}" />
+                </p:column>
+
+                <p:column headerText="موجودی" style="text-align: center; width: 100px;">
+                    <h:outputText value="#{table.mojodi}" />
+                </p:column>
+
+                <p:column headerText="شعبه عامل" style="text-align: center; width: 58px;">
+                    <h:outputText value="#{table.shobeAmel}" />
+                </p:column>
+
+                <p:column headerText="شماره سند" style="text-align: center; width: 60px;">
+                    <h:outputText value="#{table.sanadNumber}" />
+                </p:column>
+
+                <p:column headerText="شماره چک" style="text-align: center; width: 20px;">
+                    <h:outputText value="#{table.checkNumber}" />
+                </p:column>
+
+                <p:column headerText="یادداشت" styleClass="columnYaddasht" style="text-align: center; width: 400px;">
+                    <div>
+                        <h:outputText value="#{table.yaddasht}" />
+                    </div>
+                </p:column>
+
+            </p:dataTable>
+
+        </h:form>        
+    </h:body>
+
+</html>
